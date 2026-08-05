@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Polo Collection by Salveena</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom scrollbar for horizontal product scroll */
+        .hide-scroll::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scroll {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans antialiased">
+
+    <!-- Header Section -->
+    <header class="bg-slate-900 text-white shadow-md py-4 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold tracking-wider">SALVEENA</h1>
+            <p class="text-sm md:text-base hidden md:block">Premium Fabrics | Style Everyday</p>
+            <a href="#orderSection" class="bg-red-600 hover:bg-red-700 text-white px-5 py-2 rounded font-bold transition">অর্ডার করুন</a>
+        </div>
+    </header>
+
+    <!-- Hero, Reels & Features Section (Wide Horizontal Layout) -->
+    <section class="max-w-7xl mx-auto mt-8 px-4 flex flex-col lg:flex-row gap-6 items-stretch">
+        
+        <!-- Feature & Caption Box (Left) -->
+        <div class="flex-1 bg-white p-6 rounded-xl shadow-sm border border-gray-200 flex flex-col justify-center">
+            <h2 class="text-3xl font-bold text-gray-900 mb-4">Premium Polo Collection</h2>
+            <p class="text-gray-600 mb-4 font-medium">স্টাইল, কমফোর্ট এবং প্রিমিয়াম কোয়ালিটির এক নিখুঁত সমন্বয়।</p>
+            
+            <ul class="space-y-3 mb-6 text-gray-700">
+                <li class="flex items-center gap-2">✅ Soft & Breathable Premium Fabric</li>
+                <li class="flex items-center gap-2">✅ Elegant Modern Design</li>
+                <li class="flex items-center gap-2">✅ Comfortable Regular Fit</li>
+                <li class="flex items-center gap-2">✅ Long-lasting Color & Finishing</li>
+                <li class="flex items-center gap-2">✅ Perfect for Casual & Smart Casual Wear</li>
+                <li class="flex items-center gap-2 font-bold text-green-600">✅ সারা বাংলাদেশে Cash on Delivery</li>
+            </ul>
+            
+            <div class="bg-red-50 border border-red-200 p-4 rounded-lg">
+                <h3 class="text-xl font-bold text-red-600 mb-1">🔥 ৩৬ জুলাই ধামাকা অফার!</h3>
+                <p class="text-gray-700">একসাথে <strong>৩টি</strong> অর্ডার করলে পাচ্ছেন <strong>৩৬% ডিসকাউন্ট</strong>!</p>
+            </div>
+        </div>
+
+        <!-- Video Reels Box (Center) -->
+        <div class="w-full lg:w-[320px] bg-black rounded-xl overflow-hidden relative shadow-md flex-shrink-0 flex items-center justify-center min-h-[500px]">
+            <!-- Replace with actual video source -->
+            <video class="w-full h-full object-cover absolute inset-0" controls autoplay muted loop>
+                <source src="your-reels-video.mp4" type="video/mp4">
+                <p class="text-white z-10 relative">Reels Video Placeholder</p>
+            </video>
+        </div>
+
+        <!-- Demo/Offer Image (Right) -->
+        <div class="flex-1 flex flex-col justify-center">
+            <img src="image_a2fb5a.jpg" alt="36% Discount Offer" class="w-full h-full object-cover rounded-xl shadow-sm border border-gray-200 max-h-[500px]">
+        </div>
+
+    </section>
+
+    <!-- Product Display Section (11 Products - Grid) -->
+    <section class="max-w-7xl mx-auto mt-12 px-4">
+        <h2 class="text-2xl font-bold mb-6 border-l-4 border-slate-900 pl-3">আমাদের ১১টি আকর্ষণীয় কালার</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+            <!-- Product Item 1 to 11 generated using JS for brevity in code structure -->
+            <script>
+                for(let i=1; i<=11; i++) {
+                    document.write(`
+                        <div class="bg-white p-3 rounded-lg shadow-sm border border-gray-100 text-center hover:shadow-md transition">
+                            <div class="bg-gray-200 h-40 rounded-md mb-3 flex items-center justify-center text-gray-400">
+                                Shirt Image ${i}
+                            </div>
+                            <h3 class="font-bold text-sm">Polo Color ${i}</h3>
+                        </div>
+                    `);
+                }
+            </script>
+        </div>
+    </section>
+
+    <!-- Order Form Section -->
+    <section id="orderSection" class="max-w-5xl mx-auto mt-12 mb-20 px-4">
+        <div class="bg-white p-6 md:p-8 rounded-xl shadow-lg border border-gray-200">
+            <h2 class="text-2xl font-bold mb-6 text-center text-gray-900">অর্ডার কনফার্ম করতে নিচের ফর্মটি পূরণ করুন</h2>
+            
+            <form id="checkoutForm" class="space-y-6">
+                <!-- User Details (Horizontal layout for space efficiency) -->
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div class="flex-1">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">আপনার নাম *</label>
+                        <input type="text" name="customerName" required class="w-full border border-gray-300 px-4 py-2 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none">
+                    </div>
+                    <div class="flex-1">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">মোবাইল নাম্বার *</label>
+                        <input type="tel" name="phone" required class="w-full border border-gray-300 px-4 py-2 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none">
+                    </div>
+                </div>
+
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div class="flex-[2]">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">সম্পূর্ণ ঠিকানা *</label>
+                        <input type="text" name="address" required class="w-full border border-gray-300 px-4 py-2 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none" placeholder="বাসা নং, রাস্তা, এলাকা, জেলা">
+                    </div>
+                    <div class="flex-1">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">পরিমান (Quantity) *</label>
+                        <input type="number" name="quantity" min="1" value="1" required class="w-full border border-gray-300 px-4 py-2 rounded-lg focus:ring-2 focus:ring-slate-900 focus:outline-none">
+                        <p class="text-xs text-red-500 mt-1">৩টি অর্ডার করলেই ৩৬% ছাড়!</p>
+                    </div>
+                </div>
+
+                <!-- Payment Method -->
+                <div class="border-t pt-6">
+                    <label class="block font-bold text-gray-800 mb-4">পেমেন্ট মাধ্যম নির্বাচন করুন</label>
+                    <div class="flex gap-6">
+                        <label class="flex items-center gap-2 cursor-pointer bg-gray-50 px-4 py-3 border rounded-lg hover:bg-gray-100 w-full md:w-auto">
+                            <input type="radio" name="paymentType" value="COD" checked class="w-5 h-5 accent-slate-900" onchange="togglePaymentArea()">
+                            <span class="font-medium">Cash on Delivery</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer bg-pink-50 px-4 py-3 border border-pink-200 rounded-lg hover:bg-pink-100 w-full md:w-auto">
+                            <input type="radio" name="paymentType" value="bKash" class="w-5 h-5 accent-pink-600" onchange="togglePaymentArea()">
+                            <span class="font-medium text-pink-700">bKash Payment</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- bKash Section (Hidden by default, expands horizontally when active) -->
+                <div id="bkashArea" class="hidden mt-4 p-5 border border-pink-400 rounded-lg bg-white flex flex-col md:flex-row gap-6 items-center shadow-inner">
+                    <div class="w-40 flex-shrink-0">
+                        <img src="image_a2fb57.png" alt="bKash QR Code" class="w-full rounded border border-gray-200">
+                    </div>
+                    <div class="flex-1 w-full">
+                        <h4 class="text-lg font-bold text-pink-600 mb-2">bKash Payment Process</h4>
+                        <p class="text-sm text-gray-600 mb-4">QR কোড স্ক্যান করুন অথবা <strong>01611884141</strong> নাম্বারে সেন্ড মানি করুন। পেমেন্ট সম্পন্ন হলে নিচের বক্সে ট্রানজেকশন আইডি দিন।</p>
+                        
+                        <label class="block text-sm font-bold text-gray-700 mb-1">bKash Transaction ID (TrxID) *</label>
+                        <input type="text" id="trxId" name="transactionId" class="w-full border border-pink-300 px-4 py-2 rounded-lg focus:ring-2 focus:ring-pink-500 focus:outline-none" placeholder="e.g. 9BXC59DEF">
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="w-full bg-slate-900 text-white font-bold text-lg py-4 rounded-lg hover:bg-slate-800 transition shadow-lg">অর্ডার কনফার্ম করুন</button>
+            </form>
+            
+            <p class="text-center text-gray-500 text-sm mt-4">হেল্পলাইনের জন্য কল করুন: 01312-660033</p>
+        </div>
+    </section>
+
+    <script>
+        // Toggle bKash Section Visibility
+        function togglePaymentArea() {
+            const paymentType = document.querySelector('input[name="paymentType"]:checked').value;
+            const bkashArea = document.getElementById('bkashArea');
+            const trxInput = document.getElementById('trxId');
+
+            if (paymentType === 'bKash') {
+                bkashArea.classList.remove('hidden');
+                trxInput.setAttribute('required', 'true');
+            } else {
+                bkashArea.classList.add('hidden');
+                trxInput.removeAttribute('required');
+                trxInput.value = '';
+            }
+        }
+
+        // Form Submission & Data Generation for Excel (Google Sheets)
+        document.getElementById('checkoutForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Collect standard form data
+            const formData = new FormData(this);
+            const orderData = Object.fromEntries(formData.entries());
+
+            // Append Date and Time for Excel Sheet Tracking
+            const currentDate = new Date();
+            orderData.date = currentDate.toLocaleDateString('en-GB'); // DD/MM/YYYY
+            orderData.time = currentDate.toLocaleTimeString('en-US'); // HH:MM:SS AM/PM
+
+            // Log output to console (To connect to Excel, send this object via fetch to a Google Apps Script Web App URL)
+            console.log("Data Prepared for Excel Sheet:", orderData);
+
+            /* 
+             * Example API Call for Google Apps Script (Uncomment and add your URL)
+             *
+             * fetch('YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL', {
+             *     method: 'POST',
+             *     body: JSON.stringify(orderData),
+             * })
+             * .then(response => response.json())
+             * .then(data => { console.log('Success:', data); })
+             * .catch((error) => { console.error('Error:', error); });
+             */
+
+            alert('ধন্যবাদ! আপনার অর্ডারটি সফলভাবে গ্রহণ করা হয়েছে। Data console এ চেক করুন।');
+            this.reset();
+            togglePaymentArea();
+        });
+    </script>
+
+</body>
+</html>

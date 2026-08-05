@@ -1,0 +1,203 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* ===========================================================
+   Salveena Premium Fabrics — design tokens & signature styles
+   Palette: warm ink + brass (premium tailoring), flag accent
+   used ONLY on the July-36 promo badge, never brand-wide.
+   =========================================================== */
+
+:root {
+  --ink: #14181c;
+  --ink-soft: #4b5157;
+  --cream: #f4efe4;
+  --paper: #fffdf8;
+  --brass: #c9a227;
+  --brass-deep: #9c7b14;
+  --line: #d9d2c2;
+  --flag-green: #046a38;
+  --flag-red: #c8102e;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: 'Hind Siliguri', 'Inter', sans-serif;
+}
+
+.font-display { font-family: 'Fraunces', 'Noto Serif Bengali', serif; }
+.font-bn-display { font-family: 'Noto Serif Bengali', 'Fraunces', serif; }
+.font-utility { font-family: 'Inter', 'Hind Siliguri', sans-serif; }
+
+/* focus visibility (accessibility floor) */
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible {
+  outline: 2px solid var(--brass-deep);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}
+
+/* ---------- Signature: collar-curve section divider ----------
+   Traces a polo neckline scallop — the product's own silhouette
+   used as the structural device between sections. */
+.collar-divider {
+  display: block;
+  width: 100%;
+  height: 46px;
+  line-height: 0;
+}
+.collar-divider--to-ink path { fill: var(--ink); }
+.collar-divider--to-cream path { fill: var(--cream); }
+.collar-divider--to-paper path { fill: var(--paper); }
+
+/* ---------- Signature: hang-tag price chip ---------- */
+.tag-price {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px 5px 16px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 3px 8px 8px 3px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--ink);
+}
+.tag-price::before {
+  content: '';
+  position: absolute;
+  left: -5px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--cream);
+  border: 1.5px solid var(--brass-deep);
+}
+
+/* ---------- stitched hairline ---------- */
+.stitch {
+  border: none;
+  border-top: 2px dashed var(--line);
+}
+.stitch--brass { border-top: 2px dashed rgba(201,162,39,0.55); }
+
+/* ---------- promo ribbon (Bangladesh-accent, used once) ---------- */
+.promo-ribbon {
+  background: linear-gradient(135deg, var(--flag-green) 0%, var(--flag-green) 46%, var(--flag-red) 46%, var(--flag-red) 100%);
+}
+
+/* ---------- product card ---------- */
+.product-card {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+.product-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 30px -18px rgba(20,24,28,0.35);
+  border-color: var(--brass);
+}
+.product-card img { transition: transform 320ms ease; }
+.product-card:hover img { transform: scale(1.045); }
+
+.qty-btn {
+  width: 30px; height: 30px;
+  display: flex; align-items: center; justify-content: center;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  font-weight: 600;
+  color: var(--ink);
+  background: var(--paper);
+}
+.qty-btn:hover { border-color: var(--brass-deep); background: var(--cream); }
+
+/* ---------- reels phone frame ---------- */
+.phone-frame {
+  position: relative;
+  width: 208px;
+  aspect-ratio: 9 / 16;
+  border-radius: 26px;
+  background: var(--ink);
+  padding: 8px;
+  box-shadow: 0 22px 40px -20px rgba(0,0,0,0.55);
+  flex: 0 0 auto;
+}
+.phone-frame .screen {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 19px;
+  overflow: hidden;
+  background: linear-gradient(160deg, #2a2f36, #14181c);
+}
+.phone-frame video, .phone-frame .poster-fallback {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+.phone-frame .notch {
+  position: absolute; top: 12px; left: 50%; transform: translateX(-50%);
+  width: 56px; height: 5px; border-radius: 4px;
+  background: rgba(255,255,255,0.28);
+  z-index: 5;
+}
+.reels-track {
+  display: flex;
+  gap: 18px;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  padding: 6px 4px 18px;
+  -webkit-overflow-scrolling: touch;
+}
+.reels-track > * { scroll-snap-align: start; }
+.reels-track::-webkit-scrollbar { height: 6px; }
+.reels-track::-webkit-scrollbar-thumb { background: var(--line); border-radius: 4px; }
+
+.mute-btn {
+  position: absolute; bottom: 10px; right: 10px; z-index: 6;
+  width: 34px; height: 34px; border-radius: 50%;
+  background: rgba(20,24,28,0.55);
+  color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  backdrop-filter: blur(2px);
+}
+
+/* ---------- sticky cart bar ---------- */
+#cart-bar {
+  transform: translateY(120%);
+  transition: transform 260ms ease;
+}
+#cart-bar.is-visible { transform: translateY(0); }
+
+/* ---------- toast ---------- */
+#toast {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+  transition: opacity 220ms ease, transform 220ms ease;
+}
+#toast.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* radio-card for payment method */
+.pay-option {
+  cursor: pointer;
+  border: 1.5px solid var(--line);
+  transition: border-color 160ms ease, background 160ms ease;
+}
+.pay-option:has(input:checked) {
+  border-color: var(--brass-deep);
+  background: rgba(201,162,39,0.08);
+}
