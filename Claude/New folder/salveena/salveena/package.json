@@ -1,0 +1,15 @@
+{
+  "name": "salveena",
+  "version": "1.0.0",
+  "description": "Self-contained HTML / Tailwind CSS / vanilla JS landing page. No build step — open `index.html` directly, or upload the whole folder to any static host (or your existing web hosting via FTP/cPanel).",
+  "main": "index.html",
+  "scripts": {
+    "build:css": "tailwindcss -i ./src/input.css -o ./css/style.css --minify"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "tailwindcss": "^3.4.19"
+  }
+}
