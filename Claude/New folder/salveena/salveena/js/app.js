@@ -10,7 +10,7 @@ const GOOGLE_SHEET_WEBHOOK_URL =
   "https://script.google.com/macros/s/AKfycbxvW4SsRlEpZEJD2hN6xtYme_obVuHdxQSQpjMYVFMFmgAPxDVQPvPsvatln4DssYD3pg/exec";
 
 const DISCOUNT_THRESHOLD_QTY = 3; // "3টি একসাথে অর্ডার করলে" trigger
-const DISCOUNT_RATE = 0.36; // 36% — tied to the JULY36 promo
+const DISCOUNT_RATE = 0.36;
 
 (function () {
   const cart = {};
@@ -31,16 +31,20 @@ const DISCOUNT_RATE = 0.36; // 36% — tied to the JULY36 promo
     const plusBtn = card.querySelector("[data-qty-plus]");
     const sizeRadios = card.querySelectorAll(`input[name="size-${id}"]`);
 
-    // Get currently selected size
+    // Get currently selected size (No default size logic)
     function getSelectedSize() {
       const checkedRadio = card.querySelector(
         `input[name="size-${id}"]:checked`,
       );
-      return checkedRadio ? checkedRadio.value : "M";
+      return checkedRadio ? checkedRadio.value : null;
     }
 
     function updateStepperUI() {
       const size = getSelectedSize();
+      if (!size) {
+        qtyEl.textContent = "0";
+        return;
+      }
       const cartKey = `${id}_${size}`;
       const currentQty = cart[cartKey] ? cart[cartKey].qty : 0;
       qtyEl.textContent = currentQty;
@@ -49,6 +53,15 @@ const DISCOUNT_RATE = 0.36; // 36% — tied to the JULY36 promo
     // Add or remove quantity for the currently selected size
     function changeQty(delta) {
       const size = getSelectedSize();
+
+      // If no size is selected, show an alert when pressing +
+      if (!size) {
+        if (delta > 0) {
+          alert("অনুগ্রহ করে আগে সাইজ সিলেক্ট করুন।");
+        }
+        return;
+      }
+
       const cartKey = `${id}_${size}`;
       const currentQty = cart[cartKey] ? cart[cartKey].qty : 0;
 
@@ -87,6 +100,7 @@ const DISCOUNT_RATE = 0.36; // 36% — tied to the JULY36 promo
       : 0;
     const deliveryCharge = getSelectedDeliveryCharge();
     const total = subtotal - discount + deliveryCharge;
+
     return {
       items,
       totalQty,
@@ -118,9 +132,6 @@ const DISCOUNT_RATE = 0.36; // 36% — tied to the JULY36 promo
     // Sticky cart bar
     document.querySelector("[data-cart-count]").textContent = totalQty;
     document.querySelector("[data-cart-total]").textContent = `৳${total}`;
-    document
-      .querySelector("[data-cart-discount-note]")
-      .classList.toggle("hidden", !discountEligible);
     cartBar.classList.toggle("is-visible", totalQty > 0);
 
     // Order summary panel
@@ -176,19 +187,14 @@ const DISCOUNT_RATE = 0.36; // 36% — tied to the JULY36 promo
   /* ---------------- Reels: tap-to-play/mute, autoplay on view ---------------- */
   document.querySelectorAll("[data-reel]").forEach((screen) => {
     const video = screen.querySelector("[data-reel-video]");
-    const fallback = screen.querySelector("[data-reel-fallback]");
     const toggleBtn = screen.querySelector("[data-reel-toggle]");
-    let hasSource = true;
 
-    video.addEventListener("error", () => {
-      hasSource = false;
-      video.style.display = "none";
-      fallback.style.display = "flex";
-      toggleBtn.style.display = "none";
-    });
+    // The error listener that was hiding the video has been removed
+    // so the video poster/fallback can display correctly.
+
+    if (!video) return;
 
     toggleBtn.addEventListener("click", () => {
-      if (!hasSource) return;
       if (video.muted) {
         document.querySelectorAll("[data-reel-video]").forEach((v) => {
           v.muted = true;
@@ -204,7 +210,6 @@ const DISCOUNT_RATE = 0.36; // 36% — tied to the JULY36 promo
       const io = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
-            if (!hasSource) return;
             if (entry.isIntersecting) {
               video.play().catch(() => {});
             } else {
@@ -235,6 +240,7 @@ const DISCOUNT_RATE = 0.36; // 36% — tied to the JULY36 promo
     errorEl.textContent = msg;
     errorEl.classList.remove("hidden");
   }
+
   function clearError() {
     errorEl.classList.add("hidden");
   }
@@ -252,11 +258,11 @@ const DISCOUNT_RATE = 0.36; // 36% — tied to the JULY36 promo
   }
 
   async function sendToSheet(order) {
-    if (!GOOGLE_SHEET_WEBHOOK_URL) return; // not configured yet — local backup only
+    if (!GOOGLE_SHEET_WEBHOOK_URL) return;
     try {
       await fetch(GOOGLE_SHEET_WEBHOOK_URL, {
         method: "POST",
-        mode: "no-cors", // Apps Script doesn't return CORS headers; fire-and-forget
+        mode: "no-cors",
         headers: { "Content-Type": "text/plain;charset=utf-8" },
         body: JSON.stringify(order),
       });
@@ -279,6 +285,7 @@ const DISCOUNT_RATE = 0.36; // 36% — tied to the JULY36 promo
         .scrollIntoView({ behavior: "smooth" });
       return;
     }
+
     if (!form.checkValidity()) {
       form.reportValidity();
       return;
@@ -327,11 +334,19 @@ const DISCOUNT_RATE = 0.36; // 36% — tied to the JULY36 promo
     submitLabel.textContent = "অর্ডার কনফার্ম করুন";
     showToast(`ধন্যবাদ ${order.name}! অর্ডার #${order.orderId} সফল হয়েছে।`);
 
-    // reset
+    // Complete Reset
     Object.keys(cart).forEach((k) => delete cart[k]);
     document
       .querySelectorAll("[data-qty-value]")
       .forEach((el) => (el.textContent = "0"));
+
+    // Uncheck all size radio buttons
+    document
+      .querySelectorAll('input[type="radio"][name^="size-"]')
+      .forEach((radio) => {
+        radio.checked = false;
+      });
+
     form.reset();
     bkashPanel.classList.add("hidden");
     render();
